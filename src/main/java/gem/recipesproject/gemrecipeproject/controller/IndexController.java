@@ -9,7 +9,7 @@ public class IndexController
     @RequestMapping({"","/","/index"})
     public String getIndexPage()
     {
-        System.out.println("Dhanashree....");
+        System.out.println("----Dhanashree....");
         return "index_page";
     }
 
