@@ -1,14 +1,30 @@
 package gem.recipesproject.gemrecipeproject.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 public class UnitOfMeasure
 {
-    private String uom;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long unitOfMeasureId;
 
-    @OneToOne
-    private Set<Ingredients> ingredients;
+    private String description;
+
+    public Long getUnitOfMeasureId() {
+        return unitOfMeasureId;
+    }
+
+    public void setUnitOfMeasureId(Long unitOfMeasureId) {
+        this.unitOfMeasureId = unitOfMeasureId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }

@@ -2,5 +2,5 @@ package gem.recipesproject.gemrecipeproject.entities;
 
 public enum Difficulty
 {
-    easy , moderate , hard;
+    EASY, MODERATE, KIND_OF_HARD, HARD
 }

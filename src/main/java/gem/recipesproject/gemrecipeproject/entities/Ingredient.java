@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class Ingredients
+public class Ingredient
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,39 +13,34 @@ public class Ingredients
     private String description;
     private BigDecimal amount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Recipe recipe;
-
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private UnitOfMeasure unitOfMeasure;
+
+    @ManyToOne
+    private Recipe recipe;
 
     public Long getIngredientId()
     {
         return ingredientId;
     }
 
-    public void setIngredientId(Long ingredientId)
-    {
+    public void setIngredientId(Long ingredientId) {
         this.ingredientId = ingredientId;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public BigDecimal getAmount()
-    {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount)
-    {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

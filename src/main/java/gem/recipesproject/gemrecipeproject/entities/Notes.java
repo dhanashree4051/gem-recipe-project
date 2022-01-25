@@ -9,31 +9,17 @@ public class Notes
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notesId;
 
-    @Lob
-    @Column(name = "recipeNotes", columnDefinition = "CLOB")
     private String recipeNotes;
 
     @OneToOne
     private Recipe recipe;
 
-    public Long getNotesId()
-    {
+    public Long getNotesId() {
         return notesId;
     }
 
-    public void setNotesId(Long notesId)
-    {
+    public void setNotesId(Long notesId) {
         this.notesId = notesId;
-    }
-
-    public String getNotes()
-    {
-        return recipeNotes;
-    }
-
-    public void setNotes(String notes)
-    {
-        this.recipeNotes = notes;
     }
 
     public String getRecipeNotes() {

@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Recipe
-{
+public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long recipeId;
@@ -13,49 +12,52 @@ public class Recipe
     private String description;
     private Integer prepTime;
     private Integer cookTime;
-    private Integer servings;
+    private Integer serving;
     private String source;
     private String url;
     private String direction;
-   // private Difficulty difficulty;
 
-    @Lob
-    @Column(name = "image", columnDefinition = "BLOB")
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
+
     private Byte[] image;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    @OneToMany( mappedBy = "recipe", cascade = CascadeType.ALL)
-    private Set<Ingredients> ingredients;
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
-    public Long getRecipeId()
-    {
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+
+
+    public Long getRecipeId() {
         return recipeId;
     }
 
-    public void setRecipeId(Long recipeId)
-    {
+    public void setRecipeId(Long recipeId) {
         this.recipeId = recipeId;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Integer getPrepTime()
-    {
+    public Integer getPrepTime() {
         return prepTime;
     }
 
-    public void setPrepTime(Integer prepTime)
-    {
+    public void setPrepTime(Integer prepTime) {
         this.prepTime = prepTime;
     }
 
@@ -63,58 +65,47 @@ public class Recipe
         return cookTime;
     }
 
-    public void setCookTime(Integer cookTime)
-    {
+    public void setCookTime(Integer cookTime) {
         this.cookTime = cookTime;
     }
 
-    public Integer getServings()
-    {
-        return servings;
+    public Integer getServing() {
+        return serving;
     }
 
-    public void setServings(Integer servings)
-    {
-        this.servings = servings;
+    public void setServing(Integer serving) {
+        this.serving = serving;
     }
 
-    public String getSource()
-    {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getDirection()
-    {
+    public String getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction)
-    {
+    public void setDirection(String direction) {
         this.direction = direction;
     }
 
-    public Byte[] getImage()
-    {
+    public Byte[] getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image)
-    {
+    public void setImage(Byte[] image) {
         this.image = image;
     }
 
@@ -126,11 +117,27 @@ public class Recipe
         this.notes = notes;
     }
 
-    public Set<Ingredients> getIngredients() {
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Set<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredients> ingredients) {
+    public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 }
